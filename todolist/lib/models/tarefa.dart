@@ -1,16 +1,16 @@
 class Tarefa {
-  String _titulo;
-  String _conteudo;
+  String _tarefa;
+  String _dataHora;
   bool _ok;
 
-  Tarefa(this._titulo, this._conteudo, this._ok);
+  Tarefa(this._tarefa, this._dataHora, this._ok);
 
-  String toStringTitulo() {
-    return '$_titulo';
+  String toStringTarefa() {
+    return '$_tarefa';
   }
 
-  String toStringConteudo() {
-    return '$_conteudo';
+  String toStringDataHora() {
+    return '$_dataHora';
   }
 
   bool getOk() {

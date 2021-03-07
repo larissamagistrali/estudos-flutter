@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:todolist/models/tarefas.dart';
 
 class Formulario extends StatelessWidget {
-  final TextEditingController _tituloController = TextEditingController();
-  final TextEditingController _conteudoController = TextEditingController();
+  final TextEditingController _tarefaController = TextEditingController();
+  final TextEditingController _dataHoraController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class Formulario extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: _tituloController,
+                controller: _tarefaController,
                 style: TextStyle(fontSize: 24.0),
                 decoration: InputDecoration(
-                  labelText: 'Título',
-                  hintText: '...',
+                  labelText: 'Tarefa',
+                  hintText: '',
                 ),
                 keyboardType: TextInputType.text,
               ),
@@ -31,13 +31,13 @@ class Formulario extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: _conteudoController,
+                controller: _dataHoraController,
                 style: TextStyle(fontSize: 24.0),
                 decoration: InputDecoration(
-                  labelText: 'Tarefa',
-                  hintText: '...',
+                  labelText: 'Data/Hora',
+                  hintText: '',
                 ),
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.text, // type datetime?
               ),
             ),
             ElevatedButton(
@@ -51,11 +51,11 @@ class Formulario extends StatelessWidget {
   }
 
   void _novaTarefa(BuildContext context) {
-    final String _titulo = _tituloController.text;
-    final String _conteudo = _conteudoController.text;
+    final String _tarefa = _tarefaController.text;
+    final String _dataHora = _dataHoraController.text;
 
-    if (_titulo != null && _conteudo != null) {
-      final novaTarefa = Tarefa(_titulo, _conteudo, false);
+    if (_tarefa != null && _dataHoraController != null) {
+      final novaTarefa = Tarefa(_tarefa, _dataHora, false);
       _atualizaEstado(context, novaTarefa);
       Navigator.pop(context);
     }

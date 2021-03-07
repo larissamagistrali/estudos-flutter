@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todolist/screens/formulario.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/models/tarefas.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class Lista extends StatefulWidget {
   //final List<Tarefa> tarefas = [Tarefa('Titulo', 'Subtitulo')];
@@ -28,8 +27,8 @@ class _ListaState extends State<Lista> {
               //padding?
               child: CheckboxListTile(
                 //marca checkbox de todas as tarefas
-                title: Text(tarefa.toStringTitulo()),
-                subtitle: Text(tarefa.toStringConteudo()),
+                title: Text(tarefa.toStringTarefa()),
+                subtitle: Text(tarefa.toStringDataHora()),
                 value: tarefa.getOk(),
                 onChanged: (bool value) {
                   setState(() {
