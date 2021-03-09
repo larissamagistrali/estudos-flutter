@@ -1,16 +1,17 @@
 class Tarefa {
   String _tarefa;
-  String _dataHora;
+  String _data;
+  String _hora;
   bool _ok;
 
-  Tarefa(this._tarefa, this._dataHora, this._ok);
+  Tarefa(this._tarefa, this._data, this._hora, this._ok);
 
   String toStringTarefa() {
     return '$_tarefa';
   }
 
   String toStringDataHora() {
-    return '$_dataHora';
+    return '$_data - $_hora';
   }
 
   bool getOk() {
