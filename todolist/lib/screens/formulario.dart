@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/tarefa.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/tarefas.dart';
+import 'package:todolist/models/tarefasNaoFinalizadas.dart';
 import 'package:date_format/date_format.dart';
 import 'package:intl/intl.dart';
 
@@ -107,7 +107,8 @@ class _FormularioState extends State<Formulario> {
   }
 
   _atualizaEstado(context, novaTarefa) {
-    Provider.of<Tarefas>(context, listen: false).adiciona(novaTarefa);
+    Provider.of<TarefasNaoFinalizadas>(context, listen: false)
+        .adiciona(novaTarefa);
   }
 
   Future<Null> _selectDate(BuildContext context) async {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/models/tarefasFinalizadas.dart';
 import 'package:todolist/screens/formulario.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/tarefas.dart';
+import 'package:todolist/models/tarefasNaoFinalizadas.dart';
 
 class Lista extends StatefulWidget {
   //final List<Tarefa> tarefas = [Tarefa('Titulo', 'Subtitulo')];
@@ -18,27 +19,79 @@ class _ListaState extends State<Lista> {
       appBar: AppBar(
         title: Text('Minhas Tarefas'),
       ),
-      body: Consumer<Tarefas>(builder: (context, tarefas, child) {
-        return ListView.builder(
-          itemCount: tarefas.tarefas.length,
-          itemBuilder: (context, indice) {
-            final tarefa = tarefas.tarefas[indice];
-            return Card(
-              //padding?
-              child: CheckboxListTile(
-                //marca checkbox de todas as tarefas
-                title: Text(tarefa.toStringTarefa()),
-                subtitle: Text(tarefa.toStringDataHora()),
-                value: tarefa.getOk(),
-                onChanged: (bool value) {
-                  setState(() {
-                    tarefas.tarefas[indice].setOk(value);
-                  });
+      body: Consumer2<TarefasNaoFinalizadas, TarefasFinalizadas>(
+          builder: (context, tarefasNaoFinalizadas, tarefasFinalizadas, child) {
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text("Tarefas não concluídas"),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: tarefasNaoFinalizadas.tarefasNaoFinalizadas.length,
+                itemBuilder: (context, indice) {
+                  final tarefa =
+                      tarefasNaoFinalizadas.tarefasNaoFinalizadas[indice];
+                  return Card(
+                    //padding?
+                    child: CheckboxListTile(
+                      //marca checkbox de todas as tarefas
+                      title: Text(tarefa.toStringTarefa()),
+                      subtitle: Text(tarefa.toStringDataHora()),
+                      value: tarefa.getOk(),
+                      onChanged: (bool value) {
+                        setState(() {
+                          tarefasNaoFinalizadas.tarefasNaoFinalizadas[indice]
+                              .setOk(value);
+                        });
+                        tarefasFinalizadas.adiciona(tarefasNaoFinalizadas
+                            .tarefasNaoFinalizadas[indice]);
+                        tarefasNaoFinalizadas.remove(tarefasNaoFinalizadas
+                            .tarefasNaoFinalizadas[indice]);
+                      },
+                    ),
+                  );
                 },
-                activeColor: Colors.pink,
               ),
-            );
-          },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text("Tarefas concluídas"),
+            ),
+            Expanded(
+              child: Consumer<TarefasFinalizadas>(
+                  builder: (context, tarefasFinalizadas, child) {
+                return ListView.builder(
+                  itemCount: tarefasFinalizadas.tarefasFinalizadas.length,
+                  itemBuilder: (context, indice) {
+                    final tarefa =
+                        tarefasFinalizadas.tarefasFinalizadas[indice];
+                    return Card(
+                      //padding?
+                      child: CheckboxListTile(
+                        //marca checkbox de todas as tarefas
+                        title: Text(tarefa.toStringTarefa()),
+                        subtitle: Text(tarefa.toStringDataHora()),
+                        value: tarefa.getOk(),
+                        onChanged: (bool value) {
+                          setState(() {
+                            tarefasFinalizadas.tarefasFinalizadas[indice]
+                                .setOk(value);
+                          });
+                          tarefasNaoFinalizadas.adiciona(
+                              tarefasFinalizadas.tarefasFinalizadas[indice]);
+                          tarefasFinalizadas.remove(
+                              tarefasFinalizadas.tarefasFinalizadas[indice]);
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                    );
+                  },
+                );
+              }),
+            ),
+          ],
         );
       }),
       floatingActionButton: FloatingActionButton(
