@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:bytebank/components/container.dart';
 import 'package:bytebank/components/error_view.dart';
 import 'package:bytebank/components/progress/progress_view.dart';
-import 'file:///C:/Users/guilh/Dropbox/projetos/cursos/flutter-bloc2/lib/components/progress/progress.dart';
 import 'package:bytebank/components/response_dialog.dart';
 import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/http/webclients/transaction_webclient.dart';
@@ -112,6 +110,7 @@ class TransactionFormStaless extends StatelessWidget {
     });
   }
 
+  // ignore: unused_element
   Future _showSuccessfulMessage(
       Transaction transaction, BuildContext context) async {
     if (transaction != null) {
@@ -124,6 +123,7 @@ class TransactionFormStaless extends StatelessWidget {
     }
   }
 
+  // ignore: unused_element
   void _showFailureMessage(
     BuildContext context, {
     String message = 'Unknown error',
@@ -184,6 +184,7 @@ class _BasicForm extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: SizedBox(
                   width: double.maxFinite,
+                  // ignore: deprecated_member_use
                   child: RaisedButton(
                     child: Text('Transfer'),
                     onPressed: () {

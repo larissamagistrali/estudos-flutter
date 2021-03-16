@@ -49,6 +49,7 @@ class _ContactFormState extends State<ContactForm> {
               padding: const EdgeInsets.only(top: 16.0),
               child: SizedBox(
                 width: double.maxFinite,
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                   child: Text('Create'),
                   onPressed: () {

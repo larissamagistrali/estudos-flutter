@@ -1,7 +1,4 @@
 // localization e internationalization
-
-import 'dart:async';
-
 import 'package:bytebank/components/progress.dart';
 import 'package:bytebank/http/webclients/i18n_webclient.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +11,7 @@ import 'error.dart';
 class LocalizationContainer extends BlocContainer {
   final Widget child;
 
-  LocalizationContainer({@required Widget this.child});
+  LocalizationContainer({@required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +88,7 @@ class FatalErrorI18NMessagesState extends I18NMessagesState {
 
 typedef Widget I18NWidgetCreator(I18NMessages messages);
 
+// ignore: must_be_immutable
 class I18NLoadingContainer extends BlocContainer {
   I18NWidgetCreator creator;
   String viewKey;
@@ -141,7 +139,7 @@ class I18NLoadingView extends StatelessWidget {
 
 class I18NMessagesCubit extends Cubit<I18NMessagesState> {
   final LocalStorage storage =
-          new LocalStorage('local_unsecure_version_1.json');
+      new LocalStorage('local_unsecure_version_1.json');
   final String _viewKey;
 
   I18NMessagesCubit(this._viewKey) : super(InitI18NMessagesState());

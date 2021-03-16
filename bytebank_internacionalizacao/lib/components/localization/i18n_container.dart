@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class I18NLoadingContainer extends BlocContainer {
   I18NWidgetCreator creator;
   String viewKey;

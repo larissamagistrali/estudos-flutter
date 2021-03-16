@@ -54,6 +54,7 @@ class ResponseDialog extends StatelessWidget {
         ],
       ),
       actions: <Widget>[
+        // ignore: deprecated_member_use
         FlatButton(
           child: Text(buttonText),
           onPressed: () => Navigator.pop(context),

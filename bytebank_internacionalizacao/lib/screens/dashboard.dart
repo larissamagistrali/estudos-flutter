@@ -13,7 +13,7 @@ class DashboardContainer extends BlocContainer {
     return BlocProvider(
       create: (_) => NameCubit("Guilherme"),
       child: I18NLoadingContainer(
-        viewKey : "dashboard",
+        viewKey: "dashboard",
         creator: (messages) => DashboardView(DashboardViewLazyI18N(messages)),
       ),
     );
@@ -104,8 +104,10 @@ class DashboardViewLazyI18N {
   String get transfer => _messages.get("transfer");
 
   // _ é para constante. defina se você vai usar também para não constante!
+  // ignore: non_constant_identifier_names
   String get transaction_feed => _messages.get("transaction_feed");
 
+  // ignore: non_constant_identifier_names
   String get change_name => _messages.get("change_name");
 }
 
@@ -115,9 +117,11 @@ class DashboardViewI18N extends ViewI18N {
   String get transfer => localize({"pt-br": "Transferir", "en": "Transfer"});
 
   // _ é para constante. defina se você vai usar também para não constante!
+  // ignore: non_constant_identifier_names
   String get transaction_feed =>
       localize({"pt-br": "Transações", "en": "Transaction Feed"});
 
+  // ignore: non_constant_identifier_names
   String get change_name =>
       localize({"pt-br": "Mudar nome", "en": 'Change name'});
 }

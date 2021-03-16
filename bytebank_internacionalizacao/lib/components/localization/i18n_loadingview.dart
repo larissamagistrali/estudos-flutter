@@ -2,10 +2,8 @@ import 'package:bytebank/components/localization/i18n_cubit.dart';
 import 'package:bytebank/components/localization/i18n_messages.dart';
 import 'package:bytebank/components/localization/i18n_state.dart';
 import 'package:bytebank/components/progress/progress_view.dart';
-import 'file:///C:/Users/guilh/Dropbox/projetos/cursos/flutter-bloc2/lib/components/progress/progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../error_view.dart';
 
 typedef Widget I18NWidgetCreator(I18NMessages messages);
@@ -32,4 +30,3 @@ class I18NLoadingView extends StatelessWidget {
     );
   }
 }
-

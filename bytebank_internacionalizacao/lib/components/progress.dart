@@ -28,6 +28,7 @@ class Progress extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ProgressView extends StatelessWidget {
   String message;
   
