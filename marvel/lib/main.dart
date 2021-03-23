@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:marvel/models/marvel_response.dart';
-
 import 'http/webclient_marvel.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Lista());
 }
 
-class MyApp extends StatelessWidget {
+class Lista extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,8 @@ class ListaPersonagens extends StatefulWidget {
 }
 
 class _ListaPersonagensState extends State<ListaPersonagens> {
-  MarvelResponse _response;
+  MarvelResponsePersonagem _response;
+  final List<MarvelResponsePersonagem> personagens = [];
 
   void initState() {
     super.initState();
@@ -41,20 +41,40 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
       appBar: AppBar(
         title: Text('Marvel'),
       ),
-      body: //_response == null
-          // ? LinearProgressIndicator()
-          // :
-          Column(
-        children: [
-          Text('$_response.body'),
-        ],
+      body: Container(
+        child: (_response == null
+            ? LinearProgressIndicator()
+            : ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                      child: PersonagemCard(personagem: personagens[index]));
+                },
+                itemCount: personagens.length,
+              )),
       ),
     );
   }
 
-  void _loadApi() {
+  _loadApi() {
     MarvelWebClient().fetch().then((response) => setState(() {
           _response = response;
         }));
+  }
+}
+
+class PersonagemCard extends StatelessWidget {
+  final MarvelResponsePersonagem personagem;
+  PersonagemCard({this.personagem});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
+        children: [
+          Text('Personagem: $personagem.name'),
+          Text('Descrição: $personagem.description'),
+        ],
+      ),
+    );
   }
 }

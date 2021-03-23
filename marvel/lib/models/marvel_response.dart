@@ -46,7 +46,7 @@ class Data {
   int limit;
   int total;
   int count;
-  List<Results> results;
+  List<MarvelResponsePersonagem> results;
 
   Data({this.offset, this.limit, this.total, this.count, this.results});
 
@@ -57,9 +57,9 @@ class Data {
     count = json['count'];
     if (json['results'] != null) {
       // ignore: deprecated_member_use
-      results = new List<Results>();
+      results = new List<MarvelResponsePersonagem>();
       json['results'].forEach((v) {
-        results.add(new Results.fromJson(v));
+        results.add(new MarvelResponsePersonagem.fromJson(v));
       });
     }
   }
@@ -77,7 +77,7 @@ class Data {
   }
 }
 
-class Results {
+class MarvelResponsePersonagem {
   int id;
   String name;
   String description;
@@ -90,7 +90,7 @@ class Results {
   Comics events;
   List<Urls> urls;
 
-  Results(
+  MarvelResponsePersonagem(
       {this.id,
       this.name,
       this.description,
@@ -103,7 +103,7 @@ class Results {
       this.events,
       this.urls});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  MarvelResponsePersonagem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
