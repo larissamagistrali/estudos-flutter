@@ -1,18 +1,16 @@
 import 'dart:convert';
 import 'package:marvel/http/webclient.dart';
 import 'package:marvel/models/marvel_response.dart';
+import 'package:http/http.dart' as http;
 
 class MarvelWebClient {
   Future<MarvelResponse> fetch() async {
-    final uri = Uri.http(baseUrl, 'current', {
-      "apikey": apiPublicKey,
-      "ts": ts,
-      "hash": hash,
-      "limit": '20',
-      "offset": '0'
-    });
-    final response = await client.get(uri);
+    dynamic uri = Uri.parse(urlMarvel);
+    final response = await http.get(uri);
     final json = jsonDecode(response.body);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
     return MarvelResponse.fromJson(json);
   }
 }

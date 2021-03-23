@@ -41,13 +41,14 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
       appBar: AppBar(
         title: Text('Marvel'),
       ),
-      body: _response == null
-          ? LinearProgressIndicator()
-          : Column(
-              children: [
-                Text('$_response'),
-              ],
-            ),
+      body: //_response == null
+          // ? LinearProgressIndicator()
+          // :
+          Column(
+        children: [
+          Text('$_response.body'),
+        ],
+      ),
     );
   }
 
