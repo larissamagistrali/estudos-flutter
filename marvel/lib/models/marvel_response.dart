@@ -1,4 +1,4 @@
-class MarvelResponse {
+class MarvelApiResponse {
   int code;
   String status;
   String copyright;
@@ -7,7 +7,7 @@ class MarvelResponse {
   String etag;
   Data data;
 
-  MarvelResponse(
+  MarvelApiResponse(
       {this.code,
       this.status,
       this.copyright,
@@ -16,7 +16,7 @@ class MarvelResponse {
       this.etag,
       this.data});
 
-  MarvelResponse.fromJson(Map<String, dynamic> json) {
+  MarvelApiResponse.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     copyright = json['copyright'];
@@ -46,7 +46,7 @@ class Data {
   int limit;
   int total;
   int count;
-  List<MarvelResponsePersonagem> results;
+  List<Results> results;
 
   Data({this.offset, this.limit, this.total, this.count, this.results});
 
@@ -57,9 +57,9 @@ class Data {
     count = json['count'];
     if (json['results'] != null) {
       // ignore: deprecated_member_use
-      results = new List<MarvelResponsePersonagem>();
+      results = new List<Results>();
       json['results'].forEach((v) {
-        results.add(new MarvelResponsePersonagem.fromJson(v));
+        results.add(new Results.fromJson(v));
       });
     }
   }
@@ -77,7 +77,7 @@ class Data {
   }
 }
 
-class MarvelResponsePersonagem {
+class Results {
   int id;
   String name;
   String description;
@@ -90,7 +90,7 @@ class MarvelResponsePersonagem {
   Comics events;
   List<Urls> urls;
 
-  MarvelResponsePersonagem(
+  Results(
       {this.id,
       this.name,
       this.description,
@@ -103,7 +103,7 @@ class MarvelResponsePersonagem {
       this.events,
       this.urls});
 
-  MarvelResponsePersonagem.fromJson(Map<String, dynamic> json) {
+  Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -209,8 +209,8 @@ class Comics {
     return data;
   }
 }
-/*
-class Items {
+
+/*class Items {
   String resourceURI;
   String name;
 
@@ -227,8 +227,7 @@ class Items {
     data['name'] = this.name;
     return data;
   }
-}
-*/
+}*/
 
 class Items {
   String resourceURI;
