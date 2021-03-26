@@ -175,6 +175,10 @@ class Thumbnail {
     data['extension'] = this.extension;
     return data;
   }
+
+  String getFoto() {
+    return '$path.$extension';
+  }
 }
 
 class Comics {

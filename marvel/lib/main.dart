@@ -10,6 +10,10 @@ class Lista extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.red[900],
+        accentColor: Colors.blue[900],
+      ),
       home: ListaPersonagens(),
       debugShowCheckedModeBanner: false,
     );

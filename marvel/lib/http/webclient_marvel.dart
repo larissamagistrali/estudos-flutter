@@ -10,8 +10,8 @@ class MarvelWebClient {
     final response = await http.get(uri);
     final json = jsonDecode(response.body);
     print('Response status: ${response.statusCode}');
-    print('Response : ${response.headers}');
-    // print('Response body: ${response.body}');
+    print('Response body : ${response.body}');
+    print('URL: $uri');
     return MarvelApiResponse.fromJson(json);
   }
 }

@@ -15,6 +15,7 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
   MarvelApiResponse _response;
   int _offset = 0;
   int _limit = 3;
+
   //final List<MarvelApiResponse> personagens = [];
 
   void initState() {
@@ -24,7 +25,9 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
 
   @override
   Widget build(BuildContext context) {
+    //double cWidth = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
+      backgroundColor: Colors.lightBlue[900],
       appBar: AppBar(
         title: Text('Marvel'),
       ),
@@ -33,20 +36,47 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
             ? LinearProgressIndicator()
             : ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: Container(
-                        child: Row(
-                      children: [
-                        Text(
-                            'Personagem: ${_response.data.results[index].name}'),
-                        Text(
-                            'Descrição: ${_response.data.results[index].description}'),
-                      ],
-                    )),
+                  return GestureDetector(
+                    onTap: () => showMyDialog(context, _response, index),
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    _response.data.results[index].thumbnail
+                                        .getFoto(),
+                                    fit: BoxFit.fitWidth,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                  ))),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              '${_response.data.results[index].name}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.lightBlue[900],
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              '${_response.data.results[index].description}',
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
-                  //if (index == _response.data.results.length) {
-
-                  //}
                 },
                 itemCount: _response.data.results.length,
               )),
@@ -58,5 +88,20 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
     MarvelWebClient().fetch(0, 5).then((r) => setState(() {
           _response = r;
         }));
+  }
+
+  showMyDialog(BuildContext context, MarvelApiResponse response, index) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.lightBlue[900],
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+          title: Text(response.data.results[index].name),
+          content:
+              Image.network(response.data.results[index].thumbnail.getFoto()),
+        );
+      },
+    );
   }
 }
