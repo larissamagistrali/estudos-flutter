@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marvel/models/marvel_response.dart';
 import 'package:marvel/http/webclient_marvel.dart';
 
+import 'dialog.dart';
+
 class ListaPersonagens extends StatefulWidget {
   const ListaPersonagens({
     Key key,
@@ -41,38 +43,9 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
                     child: Card(
                       child: Column(
                         children: [
-                          Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.network(
-                                    _response.data.results[index].thumbnail
-                                        .getFoto(),
-                                    fit: BoxFit.fitWidth,
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                  ))),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              '${_response.data.results[index].name}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.lightBlue[900],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              '${_response.data.results[index].description}',
-                              softWrap: false,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 4,
-                            ),
-                          ),
+                          gwtWidgetImage(index, context),
+                          getWidgetName(index),
+                          getWidgetDescription(index),
                         ],
                       ),
                     ),
@@ -84,24 +57,48 @@ class _ListaPersonagensState extends State<ListaPersonagens> {
     );
   }
 
+  Padding getWidgetName(int index) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Text(
+        '${_response.data.results[index].name}',
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.lightBlue[900],
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Padding getWidgetDescription(int index) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Text(
+        '${_response.data.results[index].description}',
+        softWrap: false,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 4,
+      ),
+    );
+  }
+
+  Padding gwtWidgetImage(int index, BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              _response.data.results[index].thumbnail.getFoto(),
+              fit: BoxFit.fitWidth,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.2,
+            )));
+  }
+
   _loadApi(offset, limit) {
     MarvelWebClient().fetch(0, 5).then((r) => setState(() {
           _response = r;
         }));
-  }
-
-  showMyDialog(BuildContext context, MarvelApiResponse response, index) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.lightBlue[900],
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-          title: Text(response.data.results[index].name),
-          content:
-              Image.network(response.data.results[index].thumbnail.getFoto()),
-        );
-      },
-    );
   }
 }
