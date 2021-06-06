@@ -1,4 +1,3 @@
-# Estudos em flutter
+# Flutter studies
 
-Flutter é um kit de desenvolvimento de interface de usuário (UI toolkit), de código aberto, criado pelo Google, que possibilita a criação de aplicativos compilados nativamente.
-
+Flutter is an open source user interface development kit (UI toolkit) created by Google that makes it possible to build natively compiled applications.
